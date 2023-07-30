@@ -11,6 +11,8 @@ const Cast = () => {
   const [isError, setIsError] = useState(false);
 
   const { movieId } = useParams();
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
   useEffect(() => {
     setIsLoading(true);
@@ -47,20 +49,24 @@ const Cast = () => {
         <ul className={css.imageGallery}>
           {/*  eslint-disable-next-line react-hooks/exhaustive-deps */}
           {loadedActors.map(({ id, character, name, profile_path }) => {
-            if (profile_path) {
-              return (
-                <li key={`${id}`}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${profile_path}`}
-                    alt={`${name}`}
-                    className={css.actorsImg}
-                  ></img>
-                  <p>{`${name}`}</p>
-                  <p>Chapter: {`${character}`}</p>
-                </li>
-              );
-            }
-            return null; // Додано повернення null, якщо у актора немає profile_path
+            // if (profile_path) {
+            return (
+              <li key={`${id}`}>
+                <img
+                  src={
+                    profile_path
+                      ? `https://image.tmdb.org/t/p/w500/${profile_path}`
+                      : defaultImg
+                  }
+                  alt="poster"
+                  className={css.actorsImg}
+                ></img>
+                <p>{`${name}`}</p>
+                <p>Chapter: {`${character}`}</p>
+              </li>
+            );
+            // }
+            // return null; // Додано повернення null, якщо у актора немає profile_path
           })}
         </ul>
       </div>
