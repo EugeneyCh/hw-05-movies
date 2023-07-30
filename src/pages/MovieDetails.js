@@ -17,6 +17,8 @@ function MovieDetails() {
   const backLinkLocationRef = useRef(location.state?.from ?? '/');
 
   const goBackHandler = () => navigate(backLinkLocationRef.current);
+  const defaultImg =
+    'https://ireland.apollo.olxcdn.com/v1/files/0iq0gb9ppip8-UA/image;s=1000x700';
 
   // console.log('Movies Id is ...', movieId);
 
@@ -57,9 +59,13 @@ function MovieDetails() {
       <div className={css.movieAbout}>
         <div>
           <img
+            src={
+              movie.poster_path
+                ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                : defaultImg
+            }
+            alt="poster"
             className={css.titleImage}
-            src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-            alt={movie.title}
           />
         </div>
         <div style={{ marginLeft: ' 10px' }}>
